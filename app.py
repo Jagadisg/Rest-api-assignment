@@ -1,5 +1,6 @@
 from flask import Flask,jsonify
 import pikepdf
+import os
 
 app = Flask(__name__)
 
@@ -20,8 +21,14 @@ def pdf_rotator(file_path=None, angle_rotation=None,page_number=None):
         "file_path" : file_path,
         "angle_rotation" : angle_rotation,
         "page_number" : page_number
+    }        
+    path = os.getcwd()
+    filename = 'newsample_pdf.pdf'
+    outfile_path = os.path.join(path, filename)
+    output = {
+        'updated_file_path' : outfile_path
     }
-    return jsonify(result)
+    return jsonify(result,output)
 
 if __name__ == "__main__":
     app.run(debug=True)
